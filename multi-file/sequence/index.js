@@ -5,12 +5,11 @@
 (async () => {
 	const videoElement = document.querySelector('video');
 	const vidClips = [
-		'https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f5/STB_Stuttgart_F%C3%B6hrich_U6_Line_Entering_Station_VIDEO.webm/STB_Stuttgart_F%C3%B6hrich_U6_Line_Entering_Station_VIDEO.webm.160p.webm',
-		'https://upload.wikimedia.org/wikipedia/commons/transcoded/8/87/Schlossbergbahn.webm/Schlossbergbahn.webm.160p.webm',
-		'https://mdn.github.io/learning-area/html/multimedia-and-embedding/video-and-audio-content/rabbit320.webm'
+		'http://localhost/video/init.mp4',
+		'http://localhost/video/video0.m4s',
 	];
 	// Shuffle clips. If you reload the page, you will get a random order of videos!
-	shuffleArr(vidClips);
+	//shuffleArr(vidClips);
 
 	// Get video clips as buffers
 	const clipsToAppend = await Promise.all(
@@ -23,7 +22,8 @@
 	const mediaSource = new MediaSource();
 	videoElement.src = URL.createObjectURL(mediaSource);
 	// mode = sequence
-	const sourceBuffer = await addSourceBufferWhenOpen(mediaSource, `video/webm; codecs="vp8,vorbis"`, 'sequence');
+	//const sourceBuffer = await addSourceBufferWhenOpen(mediaSource, `video/webm; codecs="vp8,vorbis"`, 'sequence');
+	const sourceBuffer = await addSourceBufferWhenOpen(mediaSource, 'video/mp4; codecs="avc1.42001e, opus"', 'segments');
 
 	/**
 	 * Pointer to last vid appended out of source list
